@@ -10,4 +10,12 @@ public class SpecialPrice {
       this.price = price;
       this.unitThreshold = unitThreshold;
     };
+
+    public double getPrice(){
+        return price;
+    }
+
+    public int getUnitThreshold(){
+        return unitThreshold;
+    }
 }
