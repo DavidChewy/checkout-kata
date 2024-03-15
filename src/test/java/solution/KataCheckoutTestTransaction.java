@@ -58,5 +58,4 @@ class KataCheckoutTestTransaction {
         assertEquals(210, result);
     }
 
-
 }
