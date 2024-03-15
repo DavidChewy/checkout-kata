@@ -24,6 +24,7 @@ class KataCheckoutTestTransaction {
         pricingRules.put(D, new PriceQuote(15));
         kataCheckout = new KataCheckoutTransaction(pricingRules);
     }
+
     @Test
     void getTotalPrice(){
         kataCheckout.scan("B");
@@ -33,4 +34,29 @@ class KataCheckoutTestTransaction {
         double result = kataCheckout.getTotalPrice();
         assertEquals(95, result);
     }
+
+    @Test
+    void getTotalPrice_4A(){
+        kataCheckout.scan("A");
+        kataCheckout.scan("A");
+        kataCheckout.scan("A");
+        kataCheckout.scan("A");
+        double result = kataCheckout.getTotalPrice();
+        assertEquals(180, result);
+    }
+
+    @Test
+    void getTotalPrice_noSpecialPrice(){
+        kataCheckout.scan("A");
+        kataCheckout.scan("A");
+        kataCheckout.scan("B");
+        kataCheckout.scan("C");
+        kataCheckout.scan("C");
+        kataCheckout.scan("C");
+        kataCheckout.scan("C");
+        double result = kataCheckout.getTotalPrice();
+        assertEquals(210, result);
+    }
+
+
 }
