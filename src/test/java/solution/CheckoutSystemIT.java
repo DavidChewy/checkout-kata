@@ -32,8 +32,7 @@ class CheckoutSystemIT {
         transaction1.scan(A);
         transaction1.scan(A);
 
-        double transaction1Price = transaction1.getTotalPrice();
-        assertEquals(130, transaction1Price);
+        assertEquals(130, transaction1.getTotalPrice());
 
         Map<SKU, PriceQuote> pricingRules = new HashMap<>();
         pricingRules.put(A, new PriceQuote(50)); //no special price
@@ -44,9 +43,8 @@ class CheckoutSystemIT {
         transaction2.scan(A);
         transaction2.scan(A);
 
-        double transaction2Price = transaction2.getTotalPrice();
-        assertEquals(150, transaction2Price);
-        assertEquals(130, transaction1Price); //checkout transaction 1 keeps the old pricing rule
+        assertEquals(150, transaction2.getTotalPrice());
+        assertEquals(130, transaction1.getTotalPrice()); //checkout transaction 1 keeps the old pricing rule
 
     }
 }
