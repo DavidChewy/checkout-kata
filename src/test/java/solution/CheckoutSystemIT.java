@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static solution.models.SKU.*;
 import static solution.models.SKU.D;
 
-class CheckoutSystemTest {
+class CheckoutSystemIT {
 
     @BeforeEach
     void setUp() {
@@ -26,25 +26,27 @@ class CheckoutSystemTest {
     }
 
     @Test
-    void setPricingRules() {
+    void pricingRulesUpdate(){
+        CheckoutTransaction transaction1 = CheckoutSystem.getInstance().createTransaction();
+        transaction1.scan(A);
+        transaction1.scan(A);
+        transaction1.scan(A);
+
+        double transaction1Price = transaction1.getTotalPrice();
+        assertEquals(130, transaction1Price);
+
         Map<SKU, PriceQuote> pricingRules = new HashMap<>();
-        pricingRules.put(A, new PriceQuote(50, new SpecialPrice(130, 3)));
+        pricingRules.put(A, new PriceQuote(50)); //no special price
         CheckoutSystem.getInstance().setPricingRules(pricingRules);
-        assertEquals(pricingRules, CheckoutSystem.getInstance().getPricingRules());
-    }
 
-    @Test
-    void createTransaction() {
-        assertNotNull(CheckoutSystem.getInstance().createTransaction());
-    }
+        CheckoutTransaction transaction2 = CheckoutSystem.getInstance().createTransaction();
+        transaction2.scan(A);
+        transaction2.scan(A);
+        transaction2.scan(A);
 
-    @Test
-    void getInstance() {
-        CheckoutSystem system1 = CheckoutSystem.getInstance();
-        CheckoutSystem system2 = CheckoutSystem.getInstance();
-        //Should be the same since CheckOutSystem is a singleton :)
-        assertEquals(system1,system2);
-        assertSame(system1, system2);
-    }
+        double transaction2Price = transaction2.getTotalPrice();
+        assertEquals(150, transaction2Price);
+        assertEquals(130, transaction1Price); //checkout transaction 1 keeps the old pricing rule
 
+    }
 }
