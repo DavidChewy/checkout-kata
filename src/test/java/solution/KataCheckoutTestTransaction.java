@@ -27,9 +27,9 @@ class KataCheckoutTestTransaction {
 
     @Test
     void getTotalPrice(){
-        kataCheckout.scan("B");
-        kataCheckout.scan("A");
-        kataCheckout.scan("B");
+        kataCheckout.scan(SKU.B);
+        kataCheckout.scan(SKU.A);
+        kataCheckout.scan(SKU.B);
 
         double result = kataCheckout.getTotalPrice();
         assertEquals(95, result);
@@ -37,23 +37,23 @@ class KataCheckoutTestTransaction {
 
     @Test
     void getTotalPrice_4A(){
-        kataCheckout.scan("A");
-        kataCheckout.scan("A");
-        kataCheckout.scan("A");
-        kataCheckout.scan("A");
+        kataCheckout.scan(SKU.A);
+        kataCheckout.scan(SKU.A);
+        kataCheckout.scan(SKU.A);
+        kataCheckout.scan(SKU.A);
         double result = kataCheckout.getTotalPrice();
         assertEquals(180, result);
     }
 
     @Test
     void getTotalPrice_noSpecialPrice(){
-        kataCheckout.scan("A");
-        kataCheckout.scan("A");
-        kataCheckout.scan("B");
-        kataCheckout.scan("C");
-        kataCheckout.scan("C");
-        kataCheckout.scan("C");
-        kataCheckout.scan("C");
+        kataCheckout.scan(SKU.A);
+        kataCheckout.scan(SKU.A);
+        kataCheckout.scan(SKU.B);
+        kataCheckout.scan(SKU.C);
+        kataCheckout.scan(SKU.C);
+        kataCheckout.scan(SKU.C);
+        kataCheckout.scan(SKU.C);
         double result = kataCheckout.getTotalPrice();
         assertEquals(210, result);
     }
